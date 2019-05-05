@@ -21,8 +21,12 @@ public class TripManager {
 		return tripList;
 	}
 
-	public void remove(String name) {
-		tripList.remove(name);
+	public void remove(String name)throws TripNotFoundException {
+		if (tripList.containsKey(name)) {
+			tripList.remove(name);
+		} else {
+			throw new TripNotFoundException();
+		}
 	}
 	
 }

@@ -37,6 +37,23 @@ public class TripManagerTest {
 		assertEquals(1, tripManager.getTrips().size());
 		tripManager.remove(trip.getName());
 		assertEquals(0, tripManager.getTrips().size());
-		fail("chcemy zespuc");
-		}
+//		fail("chcemy zespuc");
+	}
+
+	@Test(expected = TripNotFoundException.class)
+	public void testRemoveTripTwice() throws Exception {
+		tripManager.add(trip);
+		assertEquals(1, tripManager.getTrips().size());
+		tripManager.remove(trip.getName());
+		assertEquals(0, tripManager.getTrips().size());
+		tripManager.remove(trip.getName());
+	}
+
+	@Test
+	public void testGetTrips() throws Exception {
+		tripManager.add(trip);
+		Trip secondTrip = new Trip("nazwa2", "opis2");
+		tripManager.add(secondTrip);
+		assertEquals(2, tripManager.getTrips().size());
+	}
 }
