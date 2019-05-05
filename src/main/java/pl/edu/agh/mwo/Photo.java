@@ -3,6 +3,10 @@ package pl.edu.agh.mwo;
 public class Photo {
     private String comment;
 
+    public Photo() {
+        this("untitled");
+    }
+
     public Photo(String comment) {
         this.comment = comment;
     }
