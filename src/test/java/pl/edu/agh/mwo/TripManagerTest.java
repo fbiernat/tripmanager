@@ -51,9 +51,17 @@ public class TripManagerTest {
 
 	@Test
 	public void testGetTrips() throws Exception {
+		assertEquals(0, tripManager.getTrips().size());
 		tripManager.add(trip);
 		Trip secondTrip = new Trip("nazwa2", "opis2");
 		tripManager.add(secondTrip);
 		assertEquals(2, tripManager.getTrips().size());
+	}
+
+	@Test(expected = TripNotFoundException.class)
+	public void testFindTrip() throws Exception {
+		tripManager.add(trip);
+		assertEquals(trip, tripManager.findTrip(trip.getName()));
+		assertEquals(null, tripManager.findTrip("nonexistingtrip"));
 	}
 }

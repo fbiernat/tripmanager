@@ -28,5 +28,14 @@ public class TripManager {
 			throw new TripNotFoundException();
 		}
 	}
+
+	public Trip findTrip(String keyword) throws TripNotFoundException {
+		for (Map.Entry<String,Trip> entry : tripList.entrySet()) {
+			if (entry.getKey().contains(keyword) || entry.getValue().getDescription().contains(keyword)) {
+				return entry.getValue();
+			}
+		}
+		throw new TripNotFoundException();
+	}
 	
 }
