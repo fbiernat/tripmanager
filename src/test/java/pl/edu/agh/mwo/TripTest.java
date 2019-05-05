@@ -36,4 +36,15 @@ public class TripTest {
 		trip.addPhoto(photo);
 		assertEquals(1, trip.getPhotos().size());
 	}
+
+	@Test
+	public void testGetPhotos() throws Exception {
+		trip.addPhoto(photo);
+		assertEquals(1, trip.getPhotos().size());
+	}
+
+	@Test
+	public void testGetNullPhotos() {
+		assertEquals(0, trip.getPhotos().size());
+	}
 }
