@@ -62,6 +62,7 @@ public class TripManagerTest {
 	public void testFindTrip() throws Exception {
 		tripManager.add(trip);
 		assertEquals(trip, tripManager.findTrip(trip.getName()));
+		assertEquals(trip, tripManager.findTrip(trip.getDescription()));
 		assertEquals(null, tripManager.findTrip("nonexistingtrip"));
 	}
 }
