@@ -26,12 +26,14 @@ public class TripTest {
 
 	@Test
 	public void testSetName() {
-		assertEquals("nazwa", trip.getName());
+		trip.setName("testname");
+		assertEquals("testname", trip.getName());
 	}
 
 	@Test
 	public void testSetDescription() {
-		assertEquals("opis", trip.getDescription());
+		trip.setDescription("testdescription");
+		assertEquals("testdescription", trip.getDescription());
 	}
 
 	@Test
