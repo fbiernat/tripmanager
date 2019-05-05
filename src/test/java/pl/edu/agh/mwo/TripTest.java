@@ -25,6 +25,16 @@ public class TripTest {
 	}
 
 	@Test
+	public void testSetName() {
+		assertEquals("nazwa", trip.getName());
+	}
+
+	@Test
+	public void testSetDescription() {
+		assertEquals("opis", trip.getDescription());
+	}
+
+	@Test
 	public void testAddPhoto() throws Exception {
 		trip.addPhoto(photo);
 		assertEquals(1, trip.getPhotos().size());
