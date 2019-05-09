@@ -5,15 +5,22 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TripManagerTest {
 
 	TripManager tripManager;
-	Trip trip;
-	
+	Trip trip, trip1;
+	Map<String,Trip> result = new HashMap<>();
+
 	@Before
-	public void setUp() {
+	public void setUp() throws PhotoAlreadyExistsException {
 		tripManager = new TripManager();
 		trip = new Trip("nazwa", "opis");
+		trip1 = new Trip("name", "description");
+
+		trip1.addPhoto(new Photo("comment"));
 	}
 	
 	@Test
@@ -58,11 +65,45 @@ public class TripManagerTest {
 		assertEquals(2, tripManager.getTrips().size());
 	}
 
-	@Test(expected = TripNotFoundException.class)
-	public void testFindTrip() throws Exception {
+//	@Test(expected = TripNotFoundException.class)
+//	public void testFindTrip() throws Exception {
+//		tripManager.add(trip);
+//		assertEquals(trip, tripManager.findTrip(trip.getName()));
+//		assertEquals(trip, tripManager.findTrip(trip.getDescription()));
+//		assertEquals(null, tripManager.findTrip("nonexistingtrip"));
+//	}
+
+	@Test
+	public void testFindAllTrips() throws TripAlreadyExistsException {
 		tripManager.add(trip);
-		assertEquals(trip, tripManager.findTrip(trip.getName()));
-		assertEquals(trip, tripManager.findTrip(trip.getDescription()));
-		assertEquals(null, tripManager.findTrip("nonexistingtrip"));
+		tripManager.add(trip1);
+		result.put("nazwa", trip);
+		result.put("name", trip1);
+		assertEquals(result, tripManager.findTrip(""));
 	}
+
+	@Test
+	public void testFindByTripName() throws TripAlreadyExistsException {
+		tripManager.add(trip);
+		tripManager.add(trip1);
+		result.put("nazwa", trip);
+		assertEquals(result, tripManager.findTrip("nazwa"));
+	}
+
+	@Test
+	public void testFindByTripDescription() throws TripAlreadyExistsException {
+		tripManager.add(trip);
+		tripManager.add(trip1);
+		result.put("nazwa", trip);
+		assertEquals(result, tripManager.findTrip("opis"));
+	}
+
+	@Test
+	public void testFindTripByPhotoComment() throws TripAlreadyExistsException {
+		tripManager.add(trip);
+		tripManager.add(trip1);
+		result.put("name", trip1);
+		assertEquals(result, tripManager.findTrip("comment"));
+	}
+
 }
