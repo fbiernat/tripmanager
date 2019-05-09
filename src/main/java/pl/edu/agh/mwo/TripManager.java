@@ -55,7 +55,7 @@ public class TripManager {
                 }
             }
         }
-        return result.isEmpty() ? null : result;
+        return result;
     }
 
 }
