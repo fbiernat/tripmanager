@@ -11,7 +11,7 @@ import java.util.Map;
 public class TripManagerTest {
 
 	TripManager tripManager;
-	Trip trip, trip1;
+	Trip trip, trip1, trip2;
 	Map<String,Trip> result = new HashMap<>();
 
 	@Before
@@ -19,8 +19,10 @@ public class TripManagerTest {
 		tripManager = new TripManager();
 		trip = new Trip("nazwa", "opis");
 		trip1 = new Trip("name", "description");
-
 		trip1.addPhoto(new Photo("comment"));
+
+		trip2 = new Trip("comment", "comment");
+		trip2.addPhoto(new Photo("comment"));
 	}
 	
 	@Test
@@ -103,6 +105,14 @@ public class TripManagerTest {
 		tripManager.add(trip);
 		tripManager.add(trip1);
 		result.put("name", trip1);
+		assertEquals(result, tripManager.findTrip("comment"));
+	}
+
+	@Test
+	public void testFindTripNotAddingSameTripTwice() throws Exception {
+		tripManager.add(trip);
+		tripManager.add(trip2);
+		result.put("comment", trip2);
 		assertEquals(result, tripManager.findTrip("comment"));
 	}
 
